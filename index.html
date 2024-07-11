@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            background-color: transparent; /* 設置背景為透明 */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* 全視窗高度 */
+            display: flex;
+            align-items: center; /* 垂直置中 */
+            justify-content: center; /* 水平置中 */
+        }
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center; /* 文字置中 */
+            font-family: 'Microsoft JhengHei', sans-serif; /* 設置字體為微軟正黑體 */
+            font-weight: bold; /* 文字加粗 */
+            color: white; /* 文字顏色為白色 */
+        }
+        #scrollBody {
+            overflow-y: hidden; /* 隱藏垂直滾動條 */
+            height: 25px; /* 滾動區域的高度 */
+            line-height: 25px; /* 行高與區域高度相同 */
+        }
+    </style>
+</head>
+<body>
+<div style="width: 300px;"> <!-- 設定寬度 -->
+    <div id="scrollBody">
+        <ul>
+            <li>歡迎來到 HOMESFIX</li>
+            <li>我們為客戶著想</li>
+            <li>有任何問題都可以詢問我們</li>
+            <li>希望能夠提供給客戶最有我們計數的服務和建議</li>
+            <li>來我們店裡就像回家一樣</li>
+            <li>感受到家人給你的溫暖</li>
+            <li>HOMESFIX是客人永遠的避風港</li>
+        </ul>
+    </div>
+</div>
+<script>
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    var speed = 10;
+    var delay = 1500;
+    var timeout = 0;
+    function scroll() {
+        if ($('scrollBody').scrollTop === $('scrollBody').scrollHeight - 25) {
+            $('scrollBody').scrollTop = 0;
+            timeout = setTimeout(scroll, delay);
+        } else if ($('scrollBody').scrollTop % 25 === 0) {
+            $('scrollBody').scrollTop++;
+            timeout = setTimeout(scroll, delay);
+        } else {
+            $('scrollBody').scrollTop++;
+            timeout = setTimeout(scroll, speed);
+        }
+    }
+    scroll();
+</script>
+</body>
+</html>
