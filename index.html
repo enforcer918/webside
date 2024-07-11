@@ -5,40 +5,40 @@
     <title>HOMESFIX 滾動文字</title>
     <style type="text/css">
         body {
-            background-color: #f0f0f0; /* 設置背景為淺灰色 */
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
-            height: 100vh; /* 全視窗高度 */
+            height: 100vh;
             display: flex;
-            align-items: center; /* 垂直置中 */
-            justify-content: center; /* 水平置中 */
+            align-items: center;
+            justify-content: center;
         }
         ul {
             list-style: none;
             margin: 0;
             padding: 0;
-            text-align: center; /* 文字置中 */
-            font-family: 'Microsoft JhengHei', '微軟正黑體', sans-serif; /* 設置字體，包括備用選項 */
-            font-weight: bold; /* 文字加粗 */
-            color: #333; /* 文字顏色改為深灰色 */
+            text-align: center;
+            font-family: 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+            font-weight: bold;
+            color: #333;
         }
         #scrollBody {
-            overflow-y: hidden; /* 隱藏垂直滾動條 */
-            height: 50px; /* 增加滾動區域的高度 */
-            line-height: 50px; /* 行高與區域高度相同 */
+            overflow-y: hidden;
+            height: 40px;
+            line-height: 40px;
         }
     </style>
 </head>
 <body>
-<div style="width: 300px;"> <!-- 設定寬度 -->
+<div style="width: 600px;">
     <div id="scrollBody">
-        <ul>
+        <ul id="scrollList">
             <li>歡迎來到 HOMESFIX</li>
             <li>我們為客戶著想</li>
             <li>有任何問題都可以詢問我們</li>
-            <li>希望能夠提供給客戶最有我們計數的服務和建議</li>
+            <li>我們提供給客戶最具性價比的建議</li>
             <li>來我們店裡就像回家一樣</li>
-            <li>感受到家人給你的溫暖</li>
+            <li>感受像家人的溫暖</li>
             <li>HOMESFIX是客人永遠的避風港</li>
         </ul>
     </div>
@@ -48,22 +48,29 @@
         return document.getElementById(id);
     }
 
-    var speed = 50; // 稍微降低滾動速度
-    var delay = 2000; // 增加停留時間
-    var timeout = 0;
+    var speed = 40;
+    var delay = 2000;
+    var scrollBody = $('scrollBody');
+    var scrollList = $('scrollList');
+
+    // 複製列表項目
+    var listItems = scrollList.innerHTML;
+    scrollList.innerHTML += listItems;
+
     function scroll() {
-        var scrollBody = $('scrollBody');
-        if (scrollBody.scrollTop === scrollBody.scrollHeight - scrollBody.clientHeight) {
+        if (scrollBody.scrollTop >= scrollList.clientHeight / 2) {
             scrollBody.scrollTop = 0;
-            timeout = setTimeout(scroll, delay);
-        } else if (scrollBody.scrollTop % 50 === 0) { // 與新的高度匹配
-            scrollBody.scrollTop++;
-            timeout = setTimeout(scroll, delay);
         } else {
             scrollBody.scrollTop++;
-            timeout = setTimeout(scroll, speed);
+        }
+        
+        if (scrollBody.scrollTop % 40 === 0) {
+            setTimeout(scroll, delay);
+        } else {
+            setTimeout(scroll, speed);
         }
     }
+
     scroll();
 </script>
 </body>
