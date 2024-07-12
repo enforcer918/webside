@@ -2,16 +2,21 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOMESFIX 滾動文字</title>
     <style type="text/css">
         body {
-            background-color: transparent;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .scroll-container {
+            width: 90%;
+            max-width: 600px;
         }
         ul {
             list-style: none;
@@ -27,10 +32,22 @@
             height: 40px;
             line-height: 40px;
         }
+        li {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        @media (max-width: 600px) {
+            #scrollBody {
+                height: 30px;
+                line-height: 30px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
-<div style="width: 600px;">
+<div class="scroll-container">
     <div id="scrollBody">
         <ul id="scrollList">
             <li>歡迎來到 HOMESFIX</li>
@@ -38,7 +55,7 @@
             <li>有任何問題都可以詢問我們</li>
             <li>我們提供給客戶最具性價比的建議</li>
             <li>來我們店裡就像回家一樣</li>
-            <li>感受像家人的溫暖</li>
+            <li>感受到家人給你的溫暖</li>
             <li>HOMESFIX是客人永遠的避風港</li>
         </ul>
     </div>
@@ -64,7 +81,8 @@
             scrollBody.scrollTop++;
         }
         
-        if (scrollBody.scrollTop % 40 === 0) {
+        var lineHeight = window.innerWidth <= 600 ? 30 : 40;
+        if (scrollBody.scrollTop % lineHeight === 0) {
             setTimeout(scroll, delay);
         } else {
             setTimeout(scroll, speed);
